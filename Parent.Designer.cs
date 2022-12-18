@@ -39,6 +39,7 @@
             // addTaskButton
             // 
             this.addTaskButton.BackColor = System.Drawing.Color.IndianRed;
+            this.addTaskButton.BackgroundImage = global::EasyTasks.Properties.Resources.roundedButton;
             this.addTaskButton.FlatAppearance.BorderColor = System.Drawing.Color.IndianRed;
             this.addTaskButton.FlatAppearance.BorderSize = 0;
             this.addTaskButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -55,6 +56,7 @@
             // 
             this.addGoalButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.addGoalButton.BackColor = System.Drawing.Color.IndianRed;
+            this.addGoalButton.BackgroundImage = global::EasyTasks.Properties.Resources.roundedButton;
             this.addGoalButton.FlatAppearance.BorderColor = System.Drawing.Color.IndianRed;
             this.addGoalButton.FlatAppearance.BorderSize = 0;
             this.addGoalButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -77,6 +79,7 @@
             this.taskLayoutPanel.Name = "taskLayoutPanel";
             this.taskLayoutPanel.Size = new System.Drawing.Size(560, 734);
             this.taskLayoutPanel.TabIndex = 3;
+            this.taskLayoutPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.taskLayoutPanel_Paint);
             // 
             // goalLayoutPanel
             // 

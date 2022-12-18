@@ -54,5 +54,10 @@ namespace EasyTasks
             int nWidthEllipse, // width of ellipse
             int nHeightEllipse // height of ellipse
         );
+
+        private void taskLayoutPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
