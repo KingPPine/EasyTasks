@@ -20,11 +20,11 @@ namespace EasyTasks
             InitializeComponent();
 
             addTaskButtonLocation = new Point(12, 53);
-            addGoalButtonLocation = new Point(1282, 53);
+            addGoalButtonLocation = new Point(Screen.PrimaryScreen.WorkingArea.Right - 49, 53);
             taskPanelLocation = new Point(12, 89);
-            goalPanelLocation = new Point(759, 89);
-            taskPanelSize = new Size(560, 734);
-            goalPanelSize = new Size(560, 728);
+            goalPanelLocation = new Point(Screen.PrimaryScreen.WorkingArea.Right - 572, 89);
+            taskPanelSize = new Size(560, Screen.PrimaryScreen.WorkingArea.Height - 89);
+            goalPanelSize = new Size(560, Screen.PrimaryScreen.WorkingArea.Height - 89);
             collapsePos = new Point(expandCollapseButton.Location.X + (expandCollapseButton.Width / 2),
                     expandCollapseButton.Location.Y - 100);
             collapseSize = new Size(0, 0);

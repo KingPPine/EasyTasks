@@ -13,12 +13,6 @@ namespace EasyTasks
             Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            Parent parentForm = (Parent)ParentForm;
-            parentForm.removeTask(this);
-        }
-
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn
         (
@@ -43,6 +37,12 @@ namespace EasyTasks
             Location = new Point(xPos, yPos);
             previousLocation = Location;
             */
+        }
+
+        private void TaskControl_Click(object sender, EventArgs e)
+        {
+            Parent parentForm = (Parent)ParentForm;
+            parentForm.removeTask(this);
         }
     }
 }
