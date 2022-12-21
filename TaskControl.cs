@@ -2,15 +2,33 @@
 
 namespace EasyTasks
 {
-    public partial class TaskControl : UserControl
+    public partial class taskControl : UserControl
     {
         private Point previousLocation;
+        private bool editMode;
+        private Color standardColour;
+        private Color hoverColour;
+        private Color editColour;
+        private Color desiredColour;
+        private float colourChangeSpeed;
+        private Size desiredSize;
 
-        public TaskControl()
+        public taskControl()
         {
             previousLocation = Location;
             InitializeComponent();
             Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
+            editMode = true;
+            setEditProperties();
+
+            standardColour = Color.IndianRed;
+            hoverColour = Color.FromArgb(255, 220, 142, 142);
+            editColour = Color.FromArgb(255, 233, 195, 145);
+            desiredColour = editColour;
+            colourChangeSpeed = 0.6f;
+
+            Size = new Size(0, 0);
+            desiredSize = new Size(388, 98);
         }
 
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
@@ -39,10 +57,100 @@ namespace EasyTasks
             */
         }
 
-        private void TaskControl_Click(object sender, EventArgs e)
+        private void editButton_Click(object sender, EventArgs e)
         {
-            Parent parentForm = (Parent)ParentForm;
-            parentForm.removeTask(this);
+            editMode = !editMode;
+            setEditProperties();
+        }
+
+        private void taskTitleTextbox_TextChanged(object sender, EventArgs e)
+        {
+            Size size = TextRenderer.MeasureText(taskTitleTextbox.Text, taskTitleTextbox.Font);
+            taskTitleTextbox.Width = size.Width;
+            taskTitleTextbox.Height = size.Height;
+        }
+
+        private void taskControl_Click(object sender, EventArgs e)
+        {
+            if (!editMode)
+            {
+                Parent parentForm = (Parent)ParentForm;
+                parentForm.removeTask(this);
+            }
+        }
+
+        private void setEditProperties()
+        {
+            if (editMode)
+            {
+                editButton.BackgroundImage = Properties.Resources.checkmark;
+                taskTitleTextbox.ReadOnly = false;
+                Cursor = Cursors.Default;
+                desiredColour = editColour;
+            }
+            else
+            {
+                editButton.BackgroundImage = Properties.Resources.edit;
+                taskTitleTextbox.ReadOnly = true;
+                Cursor = Cursors.Hand;
+                desiredColour = standardColour;
+            }
+        }
+
+        private void TimerUpdate(object sender, EventArgs e)
+        {
+            Color frameColour = CLerp(BackColor, desiredColour, colourChangeSpeed);
+            Size = SLerp(Size, desiredSize, colourChangeSpeed);
+            BackColor = frameColour;
+            taskTitleTextbox.BackColor = frameColour;
+            editButton.BackColor = frameColour;
+        }
+
+        private int Lerp(int a, int b, float t)
+        {
+            return (int)(a + (b - a) * t);
+        }
+
+        private Color CLerp(Color a, Color b, float t)
+        {
+            return Color.FromArgb(
+                Lerp(a.A, b.A, t),
+                Lerp(a.R, b.R, t),
+                Lerp(a.G, b.G, t),
+                Lerp(a.B, b.B, t)
+                );
+        }
+
+        private Size SLerp(Size a, Size b, float t)
+        {
+            return new Size(
+                Lerp(a.Width, b.Width, t),
+                Lerp(a.Height, b.Height, t)
+                );
+        }
+
+        private void taskControl_MouseEnter(object sender, EventArgs e)
+        {
+            if (editMode)
+            {
+                desiredColour = editColour;
+            }
+            else
+            {
+                desiredColour = hoverColour;
+            }
+        }
+
+        private void taskControl_MouseLeave(object sender, EventArgs e)
+        {
+            if (editMode)
+            {
+                desiredColour = editColour;
+            }
+            else
+            {
+                desiredColour = standardColour;
+            }
         }
     }
 }

@@ -77,9 +77,9 @@
             this.taskLayoutPanel.AutoScroll = true;
             this.taskLayoutPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.taskLayoutPanel.Location = new System.Drawing.Point(12, 89);
-            this.taskLayoutPanel.MaximumSize = new System.Drawing.Size(560, 0);
+            this.taskLayoutPanel.MaximumSize = new System.Drawing.Size(550, 0);
             this.taskLayoutPanel.Name = "taskLayoutPanel";
-            this.taskLayoutPanel.Size = new System.Drawing.Size(560, 734);
+            this.taskLayoutPanel.Size = new System.Drawing.Size(550, 735);
             this.taskLayoutPanel.TabIndex = 3;
             this.taskLayoutPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.taskLayoutPanel_Paint);
             // 
@@ -89,10 +89,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.goalLayoutPanel.AutoScroll = true;
             this.goalLayoutPanel.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.goalLayoutPanel.Location = new System.Drawing.Point(759, 89);
-            this.goalLayoutPanel.MaximumSize = new System.Drawing.Size(560, 0);
+            this.goalLayoutPanel.Location = new System.Drawing.Point(769, 89);
+            this.goalLayoutPanel.MaximumSize = new System.Drawing.Size(550, 0);
             this.goalLayoutPanel.Name = "goalLayoutPanel";
-            this.goalLayoutPanel.Size = new System.Drawing.Size(560, 734);
+            this.goalLayoutPanel.Size = new System.Drawing.Size(550, 735);
             this.goalLayoutPanel.TabIndex = 4;
             // 
             // expandCollapseButton

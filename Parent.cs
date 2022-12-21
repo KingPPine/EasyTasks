@@ -21,10 +21,10 @@ namespace EasyTasks
 
             addTaskButtonLocation = new Point(12, 53);
             addGoalButtonLocation = new Point(Screen.PrimaryScreen.WorkingArea.Right - 49, 53);
+            taskPanelSize = new Size(420, Screen.PrimaryScreen.WorkingArea.Height - 89);
             taskPanelLocation = new Point(12, 89);
-            goalPanelLocation = new Point(Screen.PrimaryScreen.WorkingArea.Right - 572, 89);
-            taskPanelSize = new Size(560, Screen.PrimaryScreen.WorkingArea.Height - 89);
-            goalPanelSize = new Size(560, Screen.PrimaryScreen.WorkingArea.Height - 89);
+            goalPanelSize = new Size(420, Screen.PrimaryScreen.WorkingArea.Height - 89);
+            goalPanelLocation = new Point(Screen.PrimaryScreen.WorkingArea.Right - goalPanelSize.Width - 12, 89);
             collapsePos = new Point(expandCollapseButton.Location.X + (expandCollapseButton.Width / 2),
                     expandCollapseButton.Location.Y - 100);
             collapseSize = new Size(0, 0);
@@ -33,7 +33,7 @@ namespace EasyTasks
 
         private void addTaskButton_Click(object sender, EventArgs e)
         {
-            TaskControl taskControl = new TaskControl();
+            taskControl taskControl = new taskControl();
             taskLayoutPanel.Controls.Add(taskControl);
             expandCollapseButton.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, expandCollapseButton.Width, expandCollapseButton.Height, 20, 20));
         }

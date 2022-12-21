@@ -40,7 +40,7 @@ namespace EasyTasks
                 Visible = true
             };
 
-            var taskControl = new TaskControl();
+            var taskControl = new taskControl();
             taskControl.Show();
 
             parentForm = new Parent();
