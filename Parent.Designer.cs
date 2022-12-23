@@ -69,6 +69,7 @@
             this.addGoalButton.TabIndex = 2;
             this.addGoalButton.Text = "+";
             this.addGoalButton.UseVisualStyleBackColor = false;
+            this.addGoalButton.Click += new System.EventHandler(this.addGoalButton_Click);
             // 
             // taskLayoutPanel
             // 

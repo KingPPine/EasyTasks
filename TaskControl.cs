@@ -4,7 +4,6 @@ namespace EasyTasks
 {
     public partial class taskControl : UserControl
     {
-        private Point previousLocation;
         private bool editMode;
         private Color standardColour;
         private Color hoverColour;
@@ -15,7 +14,6 @@ namespace EasyTasks
 
         public taskControl()
         {
-            previousLocation = Location;
             InitializeComponent();
             Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
             editMode = true;
@@ -41,21 +39,6 @@ namespace EasyTasks
             int nWidthEllipse, // width of ellipse
             int nHeightEllipse // height of ellipse
         );
-
-        private void TaskControl_Move(object sender, EventArgs e)
-        {
-            //This does not work, I will likely have to crate a custom FlowLayoutPanel that lerps the positions
-            /*
-            Point goalPosition = Location;
-
-            //lerp from previous position to new one
-            int xPos = (int)(previousLocation.X * 0.5f + goalPosition.X * 0.5f);
-            int yPos = (int)(previousLocation.Y * 0.5f + goalPosition.Y * 0.5f);
-
-            Location = new Point(xPos, yPos);
-            previousLocation = Location;
-            */
-        }
 
         private void editButton_Click(object sender, EventArgs e)
         {
@@ -150,6 +133,15 @@ namespace EasyTasks
             else
             {
                 desiredColour = standardColour;
+            }
+        }
+
+        private void taskTitleTextbox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && editMode)
+            {
+                editMode = !editMode;
+                setEditProperties();
             }
         }
     }

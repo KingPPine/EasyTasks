@@ -28,14 +28,20 @@ namespace EasyTasks
             collapsePos = new Point(expandCollapseButton.Location.X + (expandCollapseButton.Width / 2),
                     expandCollapseButton.Location.Y - 100);
             collapseSize = new Size(0, 0);
-            expandCollapseSpeed = 0.1f;
+            expandCollapseSpeed = 0.15f;
         }
 
         private void addTaskButton_Click(object sender, EventArgs e)
         {
             taskControl taskControl = new taskControl();
             taskLayoutPanel.Controls.Add(taskControl);
-            expandCollapseButton.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, expandCollapseButton.Width, expandCollapseButton.Height, 20, 20));
+            //expandCollapseButton.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, expandCollapseButton.Width, expandCollapseButton.Height, 20, 20));
+        }
+
+        private void addGoalButton_Click(object sender, EventArgs e)
+        {
+            GoalControl goalControl = new GoalControl();
+            goalLayoutPanel.Controls.Add(goalControl);
         }
 
         private void Parent_Load(object sender, EventArgs e)
@@ -58,6 +64,11 @@ namespace EasyTasks
         public void removeTask(Control taskControl)
         {
             taskLayoutPanel.Controls.Remove(taskControl);
+        }
+
+        public void removeGoal(Control goalControl)
+        {
+            goalLayoutPanel.Controls.Remove(goalControl);
         }
 
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]

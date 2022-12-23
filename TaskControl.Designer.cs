@@ -65,6 +65,7 @@
             this.taskTitleTextbox.Size = new System.Drawing.Size(113, 32);
             this.taskTitleTextbox.TabIndex = 3;
             this.taskTitleTextbox.TextChanged += new System.EventHandler(this.taskTitleTextbox_TextChanged);
+            this.taskTitleTextbox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.taskTitleTextbox_KeyDown);
             // 
             // controlTimer
             // 
