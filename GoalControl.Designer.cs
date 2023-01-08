@@ -72,6 +72,7 @@
             this.goalTitleTextbox.Size = new System.Drawing.Size(113, 32);
             this.goalTitleTextbox.TabIndex = 5;
             this.goalTitleTextbox.TextChanged += new System.EventHandler(this.goalTitleTextbox_TextChanged);
+            this.goalTitleTextbox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.goalTitleTextbox_KeyDown);
             // 
             // editButton
             // 
@@ -187,9 +188,9 @@
             this.goalTitleLabel.ForeColor = System.Drawing.Color.White;
             this.goalTitleLabel.Location = new System.Drawing.Point(8, 3);
             this.goalTitleLabel.Name = "goalTitleLabel";
-            this.goalTitleLabel.Size = new System.Drawing.Size(83, 32);
+            this.goalTitleLabel.Size = new System.Drawing.Size(69, 32);
             this.goalTitleLabel.TabIndex = 13;
-            this.goalTitleLabel.Text = "label1";
+            this.goalTitleLabel.Text = "label";
             this.goalTitleLabel.Visible = false;
             // 
             // startValueNumericUpDown
@@ -230,6 +231,11 @@
             this.EndValueNumericUpDown.Name = "EndValueNumericUpDown";
             this.EndValueNumericUpDown.Size = new System.Drawing.Size(73, 19);
             this.EndValueNumericUpDown.TabIndex = 15;
+            this.EndValueNumericUpDown.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.EndValueNumericUpDown.ValueChanged += new System.EventHandler(this.EndValueNumericUpDown_ValueChanged);
             // 
             // rangeValueNumericUpDown
@@ -265,6 +271,8 @@
             // 
             // startDateTimePicker
             // 
+            this.startDateTimePicker.CalendarForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
+            this.startDateTimePicker.CalendarTitleForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
             this.startDateTimePicker.Location = new System.Drawing.Point(8, 57);
             this.startDateTimePicker.Name = "startDateTimePicker";
             this.startDateTimePicker.Size = new System.Drawing.Size(162, 23);
@@ -273,6 +281,8 @@
             // endDateTimePicker
             // 
             this.endDateTimePicker.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.endDateTimePicker.CalendarForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
+            this.endDateTimePicker.CalendarTitleForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(10)))));
             this.endDateTimePicker.Location = new System.Drawing.Point(214, 57);
             this.endDateTimePicker.Name = "endDateTimePicker";
             this.endDateTimePicker.Size = new System.Drawing.Size(162, 23);
@@ -299,10 +309,11 @@
             this.Controls.Add(this.customProgressBar);
             this.Controls.Add(this.goalTitleTextbox);
             this.Controls.Add(this.editButton);
-            this.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Name = "GoalControl";
             this.Size = new System.Drawing.Size(388, 194);
             this.Click += new System.EventHandler(this.GoalControl_Click);
+            this.MouseEnter += new System.EventHandler(this.GoalControl_MouseEnter);
+            this.MouseLeave += new System.EventHandler(this.GoalControl_MouseLeave);
             ((System.ComponentModel.ISupportInitialize)(this.startValueNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.EndValueNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rangeValueNumericUpDown)).EndInit();

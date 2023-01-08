@@ -112,12 +112,15 @@ namespace EasyTasks
                     counterButton.Visible = false;
                     rangeValueNumericUpDown.Visible = true;
                     setValueButton.Visible = true;
+                    setValueButton.BringToFront();
                 }
                 else if (goalType == GoalType.DateRange)
                 {
                     counterButton.Visible = false;
                     rangeValueNumericUpDown.Visible = false;
                     setValueButton.Visible = false;
+                    startValueLabel.Text = startDateTimePicker.Text;
+                    endValueLabel.Text = endDateTimePicker.Text;
                 }
             }
         }
@@ -174,6 +177,11 @@ namespace EasyTasks
                         customProgressBar.Maximum = (int)(endDateTimePicker.Value - startDateTimePicker.Value).TotalDays;
                         customProgressBar.Value = (int)(DateTime.Now - startDateTimePicker.Value).TotalDays;
                     }
+                    else
+                    {
+                        customProgressBar.Minimum = (int)startValueNumericUpDown.Value;
+                        customProgressBar.Maximum = (int)EndValueNumericUpDown.Value;
+                    }
                 }
 
                 editMode = !editMode;
@@ -191,17 +199,29 @@ namespace EasyTasks
 
         private void GoalControl_Click(object sender, EventArgs e)
         {
-            //normall this would complete the goal, but I don't think I want this behaviour
+            if (!editMode && customProgressBar.Value >= customProgressBar.Maximum)
+            {
+                Parent parentForm = (Parent)ParentForm;
+                parentForm.removeGoal(this);
+            }
         }
 
         private void TimerUpdate(object sender, EventArgs e)
         {
-            Color frameColour = CLerp(BackColor, desiredColour, colourChangeSpeed);
-            Size = SLerp(Size, desiredSize, colourChangeSpeed);
-            Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
-            BackColor = frameColour;
-            goalTitleTextbox.BackColor = frameColour;
-            editButton.BackColor = frameColour;
+            if (BackColor != desiredColour || Size.Height != desiredSize.Height) //to prevent the resizing / redrawing of the region from constantly happening (causes crash)
+            {
+                float changeSpeed = colourChangeSpeed;
+
+                if (Math.Abs(Size.Height - desiredSize.Height) < 2) // to make sure there are no rounding issues
+                    changeSpeed = 1f;
+
+                Color frameColour = CLerp(BackColor, desiredColour, changeSpeed);
+                Size = SLerp(Size, desiredSize, changeSpeed);
+                Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
+                BackColor = frameColour;
+                goalTitleTextbox.BackColor = frameColour;
+                editButton.BackColor = frameColour;
+            }
 
             if (goalType == GoalType.DateRange)
                 customProgressBar.Value = (int)(DateTime.Now - startDateTimePicker.Value).TotalDays;
@@ -258,6 +278,40 @@ namespace EasyTasks
         private void setValueButton_Click(object sender, EventArgs e)
         {
             customProgressBar.Value = (int)rangeValueNumericUpDown.Value;
+        }
+
+        private void GoalControl_MouseEnter(object sender, EventArgs e)
+        {
+            if (editMode)
+            {
+                desiredColour = editColour;
+                Cursor = Cursors.Default;
+            }
+            else if (customProgressBar.Value >= customProgressBar.Maximum)
+            {
+                desiredColour = hoverColour;
+                Cursor = Cursors.Hand;
+            }
+        }
+
+        private void GoalControl_MouseLeave(object sender, EventArgs e)
+        {
+            if (editMode)
+            {
+                desiredColour = editColour;
+            }
+            else
+            {
+                desiredColour = standardColour;
+            }
+        }
+
+        private void goalTitleTextbox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && editMode)
+            {
+                editButton_Click(sender, e);
+            }
         }
     }
 

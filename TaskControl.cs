@@ -42,8 +42,11 @@ namespace EasyTasks
 
         private void editButton_Click(object sender, EventArgs e)
         {
-            editMode = !editMode;
-            setEditProperties();
+            if (!editMode || taskTitleTextbox.Text.Length > 0)
+            {
+                editMode = !editMode;
+                setEditProperties();
+            }
         }
 
         private void taskTitleTextbox_TextChanged(object sender, EventArgs e)
@@ -51,6 +54,7 @@ namespace EasyTasks
             Size size = TextRenderer.MeasureText(taskTitleTextbox.Text, taskTitleTextbox.Font);
             taskTitleTextbox.Width = size.Width;
             taskTitleTextbox.Height = size.Height;
+            taskTitleLabel.Text = taskTitleTextbox.Text;
         }
 
         private void taskControl_Click(object sender, EventArgs e)
@@ -70,6 +74,8 @@ namespace EasyTasks
                 taskTitleTextbox.ReadOnly = false;
                 Cursor = Cursors.Default;
                 desiredColour = editColour;
+                taskTitleTextbox.Visible = true;
+                taskTitleLabel.Visible = false;
             }
             else
             {
@@ -77,6 +83,8 @@ namespace EasyTasks
                 taskTitleTextbox.ReadOnly = true;
                 Cursor = Cursors.Hand;
                 desiredColour = standardColour;
+                taskTitleTextbox.Visible = false;
+                taskTitleLabel.Visible = true;
             }
         }
 
@@ -140,8 +148,7 @@ namespace EasyTasks
         {
             if (e.KeyCode == Keys.Enter && editMode)
             {
-                editMode = !editMode;
-                setEditProperties();
+                editButton_Click(sender, e);
             }
         }
     }

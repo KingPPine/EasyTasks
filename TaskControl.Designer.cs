@@ -32,6 +32,7 @@
             this.editButton = new System.Windows.Forms.Button();
             this.taskTitleTextbox = new System.Windows.Forms.TextBox();
             this.controlTimer = new System.Windows.Forms.Timer(this.components);
+            this.taskTitleLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // editButton
@@ -73,11 +74,25 @@
             this.controlTimer.Interval = 5;
             this.controlTimer.Tick += new System.EventHandler(this.TimerUpdate);
             // 
+            // taskTitleLabel
+            // 
+            this.taskTitleLabel.AutoSize = true;
+            this.taskTitleLabel.BackColor = System.Drawing.Color.Transparent;
+            this.taskTitleLabel.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.taskTitleLabel.ForeColor = System.Drawing.Color.White;
+            this.taskTitleLabel.Location = new System.Drawing.Point(8, 3);
+            this.taskTitleLabel.Name = "taskTitleLabel";
+            this.taskTitleLabel.Size = new System.Drawing.Size(69, 32);
+            this.taskTitleLabel.TabIndex = 14;
+            this.taskTitleLabel.Text = "label";
+            this.taskTitleLabel.Visible = false;
+            // 
             // taskControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(195)))), ((int)(((byte)(145)))));
+            this.Controls.Add(this.taskTitleLabel);
             this.Controls.Add(this.taskTitleTextbox);
             this.Controls.Add(this.editButton);
             this.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -96,5 +111,6 @@
         private Button editButton;
         private TextBox taskTitleTextbox;
         private System.Windows.Forms.Timer controlTimer;
+        private Label taskTitleLabel;
     }
 }

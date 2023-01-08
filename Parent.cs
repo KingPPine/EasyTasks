@@ -44,11 +44,6 @@ namespace EasyTasks
             goalLayoutPanel.Controls.Add(goalControl);
         }
 
-        private void Parent_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void expandCollapseButton_Click(object sender, EventArgs e)
         {
             if (!collapse)
@@ -71,6 +66,11 @@ namespace EasyTasks
             goalLayoutPanel.Controls.Remove(goalControl);
         }
 
+        public void SaveData()
+        {
+            //Save the data as a JSON file
+        }
+
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn
         (
@@ -81,11 +81,6 @@ namespace EasyTasks
             int nWidthEllipse, // width of ellipse
             int nHeightEllipse // height of ellipse
         );
-
-        private void taskLayoutPanel_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
 
         private void TimerUpdate(object sender, EventArgs e)
         {

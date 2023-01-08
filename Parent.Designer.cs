@@ -82,7 +82,6 @@
             this.taskLayoutPanel.Name = "taskLayoutPanel";
             this.taskLayoutPanel.Size = new System.Drawing.Size(550, 735);
             this.taskLayoutPanel.TabIndex = 3;
-            this.taskLayoutPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.taskLayoutPanel_Paint);
             // 
             // goalLayoutPanel
             // 
@@ -101,7 +100,7 @@
             this.expandCollapseButton.BackColor = System.Drawing.Color.IndianRed;
             this.expandCollapseButton.FlatAppearance.BorderSize = 0;
             this.expandCollapseButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.expandCollapseButton.Location = new System.Drawing.Point(441, -13);
+            this.expandCollapseButton.Location = new System.Drawing.Point(441, -14);
             this.expandCollapseButton.Name = "expandCollapseButton";
             this.expandCollapseButton.RoundedRadius = 10;
             this.expandCollapseButton.Size = new System.Drawing.Size(204, 17);
@@ -133,7 +132,6 @@
             this.TopMost = true;
             this.TransparencyKey = System.Drawing.Color.Black;
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.Parent_Load);
             this.ResumeLayout(false);
 
         }
