@@ -1,4 +1,5 @@
 using System.Runtime.InteropServices;
+using System.Text.Json;
 
 namespace EasyTasks
 {
@@ -29,13 +30,28 @@ namespace EasyTasks
                     expandCollapseButton.Location.Y - 100);
             collapseSize = new Size(0, 0);
             expandCollapseSpeed = 0.15f;
+
+            LoadDataFromJson();
         }
 
         private void addTaskButton_Click(object sender, EventArgs e)
         {
-            taskControl taskControl = new taskControl();
+            TaskControl taskControl = new TaskControl();
             taskLayoutPanel.Controls.Add(taskControl);
-            //expandCollapseButton.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, expandCollapseButton.Width, expandCollapseButton.Height, 20, 20));
+        }
+
+        private void LoadTask(string title)
+        {
+            TaskControl taskControl = new TaskControl();
+            taskControl.LoadTask(title);
+            taskLayoutPanel.Controls.Add(taskControl);
+        }
+
+        private void LoadGoal(string title, GoalType goalType, int startNumericalValue, int endNumericalValue, int customProgressBarValue, DateTime startDate, DateTime endDate)
+        {
+            GoalControl goalControl = new GoalControl();
+            goalControl.LoadGoal(title, goalType, startNumericalValue, endNumericalValue, customProgressBarValue, startDate, endDate);
+            goalLayoutPanel.Controls.Add(goalControl);
         }
 
         private void addGoalButton_Click(object sender, EventArgs e)
@@ -54,6 +70,8 @@ namespace EasyTasks
             {
                 collapse = false;
             }
+
+            SaveDataToJson();
         }
 
         public void removeTask(Control taskControl)
@@ -64,11 +82,6 @@ namespace EasyTasks
         public void removeGoal(Control goalControl)
         {
             goalLayoutPanel.Controls.Remove(goalControl);
-        }
-
-        public void SaveData()
-        {
-            //Save the data as a JSON file
         }
 
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
@@ -123,6 +136,65 @@ namespace EasyTasks
                 Lerp(a.Width, b.Width, t),
                 Lerp(a.Height, b.Height, t)
                 );
+        }
+
+        public void SaveDataToJson()
+        {
+            
+            TaskSaveData[] taskSaveData = new TaskSaveData[taskLayoutPanel.Controls.Count];
+            GoalSaveData[] goalSaveData = new GoalSaveData[goalLayoutPanel.Controls.Count];
+            SaveData saveData = new SaveData();
+
+            int i = 0;
+            foreach(TaskControl control in taskLayoutPanel.Controls)
+            {
+                taskSaveData[i] = new TaskSaveData();
+                taskSaveData[i].title = control.getTitle();
+                i++;
+            }
+
+            i = 0;
+            foreach (GoalControl control in goalLayoutPanel.Controls)
+            {
+                goalSaveData[i] = new GoalSaveData();
+                goalSaveData[i].title = control.getTitle();
+                goalSaveData[i].goalType = control.getGoalType();
+                goalSaveData[i].startNumericalValue = control.getStartNumericalValue();
+                goalSaveData[i].endNumericalValue = control.getEndNumericalValue();
+                goalSaveData[i].customProgressBarValue = control.getCustomProgressBarValue();
+                goalSaveData[i].startDate = control.getStartDateTime();
+                goalSaveData[i].endDate = control.getEndDateTime();
+                i++;
+            }
+
+            saveData.tasks = taskSaveData;
+            saveData.goals = goalSaveData;
+
+            string fileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "EasyTasksSaveData.json");
+            string jsonString = JsonSerializer.Serialize(saveData);
+            File.WriteAllText(fileName, jsonString );
+        }
+
+        public void LoadDataFromJson()
+        {
+            string fileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "EasyTasksSaveData.json");
+            if (File.Exists(fileName))
+            {
+                string jsonString = File.ReadAllText(fileName);
+                SaveData saveData = JsonSerializer.Deserialize<SaveData>(jsonString);
+
+                if (saveData != null || saveData.tasks.Length > 0)
+                {
+                    foreach (TaskSaveData task in saveData.tasks)
+                    {
+                        LoadTask(task.title);
+                    }
+                    foreach(GoalSaveData goal in saveData.goals)
+                    {
+                        LoadGoal(goal.title, goal.goalType, goal.startNumericalValue, goal.endNumericalValue , goal.customProgressBarValue, goal.startDate, goal.endDate);
+                    }
+                }
+            }
         }
     }
 }

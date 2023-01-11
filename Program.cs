@@ -15,6 +15,7 @@ namespace EasyTasks
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
+            Application.EnableVisualStyles();
             Application.Run(new MyCustomApplicationContext());
         }
     }
@@ -40,7 +41,7 @@ namespace EasyTasks
                 Visible = true
             };
 
-            var taskControl = new taskControl();
+            var taskControl = new TaskControl();
             taskControl.Show();
 
             parentForm = new Parent();

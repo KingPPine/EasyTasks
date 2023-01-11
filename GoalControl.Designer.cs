@@ -46,9 +46,17 @@
             this.setValueButton = new System.Windows.Forms.Button();
             this.startDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.endDateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.topLeftCornerImage = new System.Windows.Forms.PictureBox();
+            this.topRightCornerImage = new System.Windows.Forms.PictureBox();
+            this.bottomLeftCornerImage = new System.Windows.Forms.PictureBox();
+            this.bottomRightCornerImage = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.startValueNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.EndValueNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.rangeValueNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.topLeftCornerImage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.topRightCornerImage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bottomLeftCornerImage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bottomRightCornerImage)).BeginInit();
             this.SuspendLayout();
             // 
             // controlTimer
@@ -288,11 +296,58 @@
             this.endDateTimePicker.Size = new System.Drawing.Size(162, 23);
             this.endDateTimePicker.TabIndex = 19;
             // 
+            // topLeftCornerImage
+            // 
+            this.topLeftCornerImage.BackColor = System.Drawing.Color.Transparent;
+            this.topLeftCornerImage.Image = global::EasyTasks.Properties.Resources.pixel_corner;
+            this.topLeftCornerImage.Location = new System.Drawing.Point(0, 0);
+            this.topLeftCornerImage.Name = "topLeftCornerImage";
+            this.topLeftCornerImage.Size = new System.Drawing.Size(3, 3);
+            this.topLeftCornerImage.TabIndex = 20;
+            this.topLeftCornerImage.TabStop = false;
+            // 
+            // topRightCornerImage
+            // 
+            this.topRightCornerImage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.topRightCornerImage.BackColor = System.Drawing.Color.Transparent;
+            this.topRightCornerImage.Image = global::EasyTasks.Properties.Resources.pixel_corner_topright;
+            this.topRightCornerImage.Location = new System.Drawing.Point(385, 0);
+            this.topRightCornerImage.Name = "topRightCornerImage";
+            this.topRightCornerImage.Size = new System.Drawing.Size(3, 3);
+            this.topRightCornerImage.TabIndex = 21;
+            this.topRightCornerImage.TabStop = false;
+            // 
+            // bottomLeftCornerImage
+            // 
+            this.bottomLeftCornerImage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.bottomLeftCornerImage.BackColor = System.Drawing.Color.Transparent;
+            this.bottomLeftCornerImage.Image = global::EasyTasks.Properties.Resources.pixel_corner_bottomleft;
+            this.bottomLeftCornerImage.Location = new System.Drawing.Point(0, 191);
+            this.bottomLeftCornerImage.Name = "bottomLeftCornerImage";
+            this.bottomLeftCornerImage.Size = new System.Drawing.Size(3, 3);
+            this.bottomLeftCornerImage.TabIndex = 22;
+            this.bottomLeftCornerImage.TabStop = false;
+            // 
+            // bottomRightCornerImage
+            // 
+            this.bottomRightCornerImage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.bottomRightCornerImage.BackColor = System.Drawing.Color.Transparent;
+            this.bottomRightCornerImage.Image = global::EasyTasks.Properties.Resources.pixel_corner_bottomright;
+            this.bottomRightCornerImage.Location = new System.Drawing.Point(385, 191);
+            this.bottomRightCornerImage.Name = "bottomRightCornerImage";
+            this.bottomRightCornerImage.Size = new System.Drawing.Size(3, 3);
+            this.bottomRightCornerImage.TabIndex = 23;
+            this.bottomRightCornerImage.TabStop = false;
+            // 
             // GoalControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(195)))), ((int)(((byte)(145)))));
+            this.Controls.Add(this.bottomRightCornerImage);
+            this.Controls.Add(this.bottomLeftCornerImage);
+            this.Controls.Add(this.topRightCornerImage);
+            this.Controls.Add(this.topLeftCornerImage);
             this.Controls.Add(this.endDateTimePicker);
             this.Controls.Add(this.startDateTimePicker);
             this.Controls.Add(this.setValueButton);
@@ -317,6 +372,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.startValueNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.EndValueNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.rangeValueNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.topLeftCornerImage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.topRightCornerImage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bottomLeftCornerImage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bottomRightCornerImage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -341,5 +400,9 @@
         private Button setValueButton;
         private DateTimePicker startDateTimePicker;
         private DateTimePicker endDateTimePicker;
+        private PictureBox topLeftCornerImage;
+        private PictureBox topRightCornerImage;
+        private PictureBox bottomLeftCornerImage;
+        private PictureBox bottomRightCornerImage;
     }
 }

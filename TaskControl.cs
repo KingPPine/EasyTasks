@@ -2,7 +2,7 @@
 
 namespace EasyTasks
 {
-    public partial class taskControl : UserControl
+    public partial class TaskControl : UserControl
     {
         private bool editMode;
         private Color standardColour;
@@ -12,10 +12,10 @@ namespace EasyTasks
         private float colourChangeSpeed;
         private Size desiredSize;
 
-        public taskControl()
+        public TaskControl()
         {
             InitializeComponent();
-            Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
+            //Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
             editMode = true;
             setEditProperties();
 
@@ -39,6 +39,15 @@ namespace EasyTasks
             int nWidthEllipse, // width of ellipse
             int nHeightEllipse // height of ellipse
         );
+
+        //for loading a task when the program opens
+        public void LoadTask(string title)
+        {
+            taskTitleLabel.Text = title;
+            taskTitleTextbox.Text = title;
+            editMode= false;
+            setEditProperties();
+        }
 
         private void editButton_Click(object sender, EventArgs e)
         {
@@ -150,6 +159,11 @@ namespace EasyTasks
             {
                 editButton_Click(sender, e);
             }
+        }
+
+        public string getTitle()
+        {
+            return taskTitleLabel.Text;
         }
     }
 }

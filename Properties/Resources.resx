@@ -121,6 +121,9 @@
   <data name="AppIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\jerry_seinfeld.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="pixel corner" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pixel corner.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="checkmark" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\checkmark.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -129,5 +132,14 @@
   </data>
   <data name="roundedButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\roundedButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pixel corner bottomleft" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pixel corner bottomleft.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pixel corner bottomright" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pixel corner bottomright.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="pixel corner topright" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pixel corner topright.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

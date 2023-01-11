@@ -18,7 +18,7 @@ namespace EasyTasks
         public GoalControl()
         {
             InitializeComponent();
-            Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
+            //Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
             editMode = true;
             setEditProperties();
 
@@ -136,6 +136,27 @@ namespace EasyTasks
             int nHeightEllipse // height of ellipse
         );
 
+        //for loading a goal when the program opens
+        public void LoadGoal(string title, GoalType goalType, int startNumericalValue, int endNumericalValue, int customProgressBarValue, DateTime startDate, DateTime endDate)
+        {
+            goalTitleLabel.Text = title;
+            goalTitleTextbox.Text = title;
+            customProgressBar.Minimum = startNumericalValue;
+            startValueNumericUpDown.Value = startNumericalValue;
+            customProgressBar.Maximum = endNumericalValue;
+            EndValueNumericUpDown.Value = endNumericalValue;
+            customProgressBar.Value = customProgressBarValue;
+            startDateTimePicker.Value = startDate;
+            endDateTimePicker.Value = endDate;
+
+            if (goalType == GoalType.Counter) counterRadioButton.Checked = true;
+            if (goalType == GoalType.NumberRange) numberRangeRadioButton.Checked = true;
+            if (goalType == GoalType.DateRange) dateRangeRadioButton.Checked = true;
+
+            editMode = false;
+            setEditProperties();
+        }
+
         private int Lerp(int a, int b, float t)
         {
             return (int)(a + (b - a) * t);
@@ -217,7 +238,7 @@ namespace EasyTasks
 
                 Color frameColour = CLerp(BackColor, desiredColour, changeSpeed);
                 Size = SLerp(Size, desiredSize, changeSpeed);
-                Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
+                //Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
                 BackColor = frameColour;
                 goalTitleTextbox.BackColor = frameColour;
                 editButton.BackColor = frameColour;
@@ -313,9 +334,38 @@ namespace EasyTasks
                 editButton_Click(sender, e);
             }
         }
+
+        public string getTitle()
+        {
+            return goalTitleLabel.Text;
+        }
+        public GoalType getGoalType()
+        {
+            return goalType;
+        }
+        public int getStartNumericalValue()
+        {
+            return customProgressBar.Minimum;
+        }
+        public int getEndNumericalValue()
+        {
+            return customProgressBar.Maximum;
+        }
+        public int getCustomProgressBarValue()
+        {
+            return customProgressBar.Value;
+        }
+        public DateTime getStartDateTime()
+        {
+            return startDateTimePicker.Value;
+        }
+        public DateTime getEndDateTime()
+        {
+            return endDateTimePicker.Value;
+        }
     }
 
-    enum GoalType
+    public enum GoalType
     {
         Counter, //A counter from a min value to a max value (button to add +1)
         NumberRange, //A range between a min value to a max value (button to set the value)

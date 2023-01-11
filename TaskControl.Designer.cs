@@ -1,6 +1,6 @@
 ﻿namespace EasyTasks
 {
-    partial class taskControl
+    partial class TaskControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -33,6 +33,14 @@
             this.taskTitleTextbox = new System.Windows.Forms.TextBox();
             this.controlTimer = new System.Windows.Forms.Timer(this.components);
             this.taskTitleLabel = new System.Windows.Forms.Label();
+            this.bottomRightCornerImage = new System.Windows.Forms.PictureBox();
+            this.bottomLeftCornerImage = new System.Windows.Forms.PictureBox();
+            this.topRightCornerImage = new System.Windows.Forms.PictureBox();
+            this.topLeftCornerImage = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.bottomRightCornerImage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bottomLeftCornerImage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.topRightCornerImage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.topLeftCornerImage)).BeginInit();
             this.SuspendLayout();
             // 
             // editButton
@@ -87,20 +95,71 @@
             this.taskTitleLabel.Text = "label";
             this.taskTitleLabel.Visible = false;
             // 
-            // taskControl
+            // bottomRightCornerImage
+            // 
+            this.bottomRightCornerImage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.bottomRightCornerImage.BackColor = System.Drawing.Color.Transparent;
+            this.bottomRightCornerImage.Image = global::EasyTasks.Properties.Resources.pixel_corner_bottomright;
+            this.bottomRightCornerImage.Location = new System.Drawing.Point(385, 95);
+            this.bottomRightCornerImage.Name = "bottomRightCornerImage";
+            this.bottomRightCornerImage.Size = new System.Drawing.Size(3, 3);
+            this.bottomRightCornerImage.TabIndex = 27;
+            this.bottomRightCornerImage.TabStop = false;
+            // 
+            // bottomLeftCornerImage
+            // 
+            this.bottomLeftCornerImage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.bottomLeftCornerImage.BackColor = System.Drawing.Color.Transparent;
+            this.bottomLeftCornerImage.Image = global::EasyTasks.Properties.Resources.pixel_corner_bottomleft;
+            this.bottomLeftCornerImage.Location = new System.Drawing.Point(0, 95);
+            this.bottomLeftCornerImage.Name = "bottomLeftCornerImage";
+            this.bottomLeftCornerImage.Size = new System.Drawing.Size(3, 3);
+            this.bottomLeftCornerImage.TabIndex = 26;
+            this.bottomLeftCornerImage.TabStop = false;
+            // 
+            // topRightCornerImage
+            // 
+            this.topRightCornerImage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.topRightCornerImage.BackColor = System.Drawing.Color.Transparent;
+            this.topRightCornerImage.Image = global::EasyTasks.Properties.Resources.pixel_corner_topright;
+            this.topRightCornerImage.Location = new System.Drawing.Point(385, 0);
+            this.topRightCornerImage.Name = "topRightCornerImage";
+            this.topRightCornerImage.Size = new System.Drawing.Size(3, 3);
+            this.topRightCornerImage.TabIndex = 25;
+            this.topRightCornerImage.TabStop = false;
+            // 
+            // topLeftCornerImage
+            // 
+            this.topLeftCornerImage.BackColor = System.Drawing.Color.Transparent;
+            this.topLeftCornerImage.Image = global::EasyTasks.Properties.Resources.pixel_corner;
+            this.topLeftCornerImage.Location = new System.Drawing.Point(0, 0);
+            this.topLeftCornerImage.Name = "topLeftCornerImage";
+            this.topLeftCornerImage.Size = new System.Drawing.Size(3, 3);
+            this.topLeftCornerImage.TabIndex = 24;
+            this.topLeftCornerImage.TabStop = false;
+            // 
+            // TaskControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(195)))), ((int)(((byte)(145)))));
+            this.Controls.Add(this.bottomRightCornerImage);
+            this.Controls.Add(this.bottomLeftCornerImage);
+            this.Controls.Add(this.topRightCornerImage);
+            this.Controls.Add(this.topLeftCornerImage);
             this.Controls.Add(this.taskTitleLabel);
             this.Controls.Add(this.taskTitleTextbox);
             this.Controls.Add(this.editButton);
             this.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.Name = "taskControl";
+            this.Name = "TaskControl";
             this.Size = new System.Drawing.Size(388, 98);
             this.Click += new System.EventHandler(this.taskControl_Click);
             this.MouseEnter += new System.EventHandler(this.taskControl_MouseEnter);
             this.MouseLeave += new System.EventHandler(this.taskControl_MouseLeave);
+            ((System.ComponentModel.ISupportInitialize)(this.bottomRightCornerImage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bottomLeftCornerImage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.topRightCornerImage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.topLeftCornerImage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -112,5 +171,9 @@
         private TextBox taskTitleTextbox;
         private System.Windows.Forms.Timer controlTimer;
         private Label taskTitleLabel;
+        private PictureBox bottomRightCornerImage;
+        private PictureBox bottomLeftCornerImage;
+        private PictureBox topRightCornerImage;
+        private PictureBox topLeftCornerImage;
     }
 }
