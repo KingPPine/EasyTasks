@@ -55,6 +55,12 @@ namespace EasyTasks
             {
                 editMode = !editMode;
                 setEditProperties();
+
+                if (!editMode)
+                {
+                    Parent parentForm = (Parent)ParentForm;
+                    parentForm.SaveDataToJson();
+                }
             }
         }
 

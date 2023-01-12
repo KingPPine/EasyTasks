@@ -70,18 +70,18 @@ namespace EasyTasks
             {
                 collapse = false;
             }
-
-            SaveDataToJson();
         }
 
         public void removeTask(Control taskControl)
         {
             taskLayoutPanel.Controls.Remove(taskControl);
+            SaveDataToJson();
         }
 
         public void removeGoal(Control goalControl)
         {
             goalLayoutPanel.Controls.Remove(goalControl);
+            SaveDataToJson();
         }
 
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]

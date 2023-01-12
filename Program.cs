@@ -52,6 +52,7 @@ namespace EasyTasks
         {
             // Hide tray icon, otherwise it will remain shown until user mouses over it
             trayIcon.Visible = false;
+            parentForm.SaveDataToJson();
             parentForm.Close();
             Application.Exit();
         }

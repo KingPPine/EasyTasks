@@ -207,6 +207,12 @@ namespace EasyTasks
 
                 editMode = !editMode;
                 setEditProperties();
+
+                if (!editMode)
+                {
+                    Parent parentForm = (Parent)ParentForm;
+                    parentForm.SaveDataToJson();
+                }
             }
         }
 
@@ -278,6 +284,8 @@ namespace EasyTasks
         private void counterButton_Click(object sender, EventArgs e)
         {
             customProgressBar.Value += 1;
+            Parent parentForm = (Parent)ParentForm;
+            parentForm.SaveDataToJson();
         }
 
         private void startValueNumericUpDown_ValueChanged(object sender, EventArgs e)
@@ -299,6 +307,8 @@ namespace EasyTasks
         private void setValueButton_Click(object sender, EventArgs e)
         {
             customProgressBar.Value = (int)rangeValueNumericUpDown.Value;
+            Parent parentForm = (Parent)ParentForm;
+            parentForm.SaveDataToJson();
         }
 
         private void GoalControl_MouseEnter(object sender, EventArgs e)
