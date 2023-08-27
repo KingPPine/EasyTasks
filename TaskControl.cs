@@ -5,6 +5,7 @@ namespace EasyTasks
     public partial class TaskControl : UserControl
     {
         private bool editMode;
+        private int databaseID;
         private Color standardColour;
         private Color hoverColour;
         private Color editColour;
@@ -17,6 +18,7 @@ namespace EasyTasks
             InitializeComponent();
             //Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 20, 20));
             editMode = true;
+            databaseID = -1;
             setEditProperties();
 
             standardColour = Color.IndianRed;
@@ -59,6 +61,12 @@ namespace EasyTasks
                 if (!editMode)
                 {
                     Parent parentForm = (Parent)ParentForm;
+
+                    if (databaseID <= 0)
+                        parentForm.AddTaskDatabase(this);
+                    else
+                        parentForm.UpdateTaskDatabase(this);
+
                     parentForm.SaveDataToJson();
                 }
             }
@@ -77,6 +85,7 @@ namespace EasyTasks
             if (!editMode)
             {
                 Parent parentForm = (Parent)ParentForm;
+                parentForm.CompleteTaskDatabase(this);
                 parentForm.removeTask(this);
             }
         }
@@ -170,6 +179,16 @@ namespace EasyTasks
         public string getTitle()
         {
             return taskTitleLabel.Text;
+        }
+
+        public int getDatabaseID()
+        {
+            return databaseID;
+        }
+
+        public void setDatabaseID(int id)
+        {
+            databaseID = id;
         }
     }
 }

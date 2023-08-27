@@ -28,117 +28,126 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.addTaskButton = new System.Windows.Forms.Button();
-            this.addGoalButton = new System.Windows.Forms.Button();
-            this.taskLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
-            this.goalLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.expandCollapseButton = new EasyTasks.RoundButton();
-            this.expandCollapseTimer = new System.Windows.Forms.Timer(this.components);
-            this.SuspendLayout();
+            components = new System.ComponentModel.Container();
+            addTaskButton = new Button();
+            addGoalButton = new Button();
+            taskLayoutPanel = new FlowLayoutPanel();
+            goalLayoutPanel = new FlowLayoutPanel();
+            backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            expandCollapseButton = new RoundButton();
+            expandCollapseTimer = new System.Windows.Forms.Timer(components);
+            testButton = new Button();
+            SuspendLayout();
             // 
             // addTaskButton
             // 
-            this.addTaskButton.BackColor = System.Drawing.Color.IndianRed;
-            this.addTaskButton.BackgroundImage = global::EasyTasks.Properties.Resources.roundedButton;
-            this.addTaskButton.FlatAppearance.BorderColor = System.Drawing.Color.IndianRed;
-            this.addTaskButton.FlatAppearance.BorderSize = 0;
-            this.addTaskButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.addTaskButton.ForeColor = System.Drawing.Color.White;
-            this.addTaskButton.Location = new System.Drawing.Point(12, 53);
-            this.addTaskButton.Name = "addTaskButton";
-            this.addTaskButton.Size = new System.Drawing.Size(37, 30);
-            this.addTaskButton.TabIndex = 1;
-            this.addTaskButton.Text = "+";
-            this.addTaskButton.UseVisualStyleBackColor = false;
-            this.addTaskButton.Click += new System.EventHandler(this.addTaskButton_Click);
+            addTaskButton.BackColor = Color.IndianRed;
+            addTaskButton.BackgroundImage = Properties.Resources.roundedButton;
+            addTaskButton.FlatAppearance.BorderColor = Color.IndianRed;
+            addTaskButton.FlatAppearance.BorderSize = 0;
+            addTaskButton.FlatStyle = FlatStyle.Flat;
+            addTaskButton.ForeColor = Color.White;
+            addTaskButton.Location = new Point(12, 53);
+            addTaskButton.Name = "addTaskButton";
+            addTaskButton.Size = new Size(37, 30);
+            addTaskButton.TabIndex = 1;
+            addTaskButton.Text = "+";
+            addTaskButton.UseVisualStyleBackColor = false;
+            addTaskButton.Click += addTaskButton_Click;
             // 
             // addGoalButton
             // 
-            this.addGoalButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.addGoalButton.BackColor = System.Drawing.Color.IndianRed;
-            this.addGoalButton.BackgroundImage = global::EasyTasks.Properties.Resources.roundedButton;
-            this.addGoalButton.FlatAppearance.BorderColor = System.Drawing.Color.IndianRed;
-            this.addGoalButton.FlatAppearance.BorderSize = 0;
-            this.addGoalButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.addGoalButton.ForeColor = System.Drawing.Color.White;
-            this.addGoalButton.Location = new System.Drawing.Point(1282, 53);
-            this.addGoalButton.Name = "addGoalButton";
-            this.addGoalButton.Size = new System.Drawing.Size(37, 30);
-            this.addGoalButton.TabIndex = 2;
-            this.addGoalButton.Text = "+";
-            this.addGoalButton.UseVisualStyleBackColor = false;
-            this.addGoalButton.Click += new System.EventHandler(this.addGoalButton_Click);
+            addGoalButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            addGoalButton.BackColor = Color.IndianRed;
+            addGoalButton.BackgroundImage = Properties.Resources.roundedButton;
+            addGoalButton.FlatAppearance.BorderColor = Color.IndianRed;
+            addGoalButton.FlatAppearance.BorderSize = 0;
+            addGoalButton.FlatStyle = FlatStyle.Flat;
+            addGoalButton.ForeColor = Color.White;
+            addGoalButton.Location = new Point(1282, 53);
+            addGoalButton.Name = "addGoalButton";
+            addGoalButton.Size = new Size(37, 30);
+            addGoalButton.TabIndex = 2;
+            addGoalButton.Text = "+";
+            addGoalButton.UseVisualStyleBackColor = false;
+            addGoalButton.Click += addGoalButton_Click;
             // 
             // taskLayoutPanel
             // 
-            this.taskLayoutPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.taskLayoutPanel.AutoScroll = true;
-            this.taskLayoutPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.taskLayoutPanel.Location = new System.Drawing.Point(12, 89);
-            this.taskLayoutPanel.MaximumSize = new System.Drawing.Size(550, 0);
-            this.taskLayoutPanel.Name = "taskLayoutPanel";
-            this.taskLayoutPanel.Size = new System.Drawing.Size(550, 735);
-            this.taskLayoutPanel.TabIndex = 3;
+            taskLayoutPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+            taskLayoutPanel.AutoScroll = true;
+            taskLayoutPanel.BackgroundImageLayout = ImageLayout.None;
+            taskLayoutPanel.Location = new Point(12, 89);
+            taskLayoutPanel.MaximumSize = new Size(550, 0);
+            taskLayoutPanel.Name = "taskLayoutPanel";
+            taskLayoutPanel.Size = new Size(550, 735);
+            taskLayoutPanel.TabIndex = 3;
             // 
             // goalLayoutPanel
             // 
-            this.goalLayoutPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.goalLayoutPanel.AutoScroll = true;
-            this.goalLayoutPanel.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
-            this.goalLayoutPanel.Location = new System.Drawing.Point(769, 89);
-            this.goalLayoutPanel.MaximumSize = new System.Drawing.Size(550, 0);
-            this.goalLayoutPanel.Name = "goalLayoutPanel";
-            this.goalLayoutPanel.Size = new System.Drawing.Size(550, 735);
-            this.goalLayoutPanel.TabIndex = 4;
+            goalLayoutPanel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+            goalLayoutPanel.AutoScroll = true;
+            goalLayoutPanel.FlowDirection = FlowDirection.RightToLeft;
+            goalLayoutPanel.Location = new Point(769, 89);
+            goalLayoutPanel.MaximumSize = new Size(550, 0);
+            goalLayoutPanel.Name = "goalLayoutPanel";
+            goalLayoutPanel.Size = new Size(550, 735);
+            goalLayoutPanel.TabIndex = 4;
             // 
             // expandCollapseButton
             // 
-            this.expandCollapseButton.BackColor = System.Drawing.Color.IndianRed;
-            this.expandCollapseButton.FlatAppearance.BorderSize = 0;
-            this.expandCollapseButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.expandCollapseButton.Location = new System.Drawing.Point(441, -14);
-            this.expandCollapseButton.Name = "expandCollapseButton";
-            this.expandCollapseButton.RoundedRadius = 10;
-            this.expandCollapseButton.Size = new System.Drawing.Size(204, 17);
-            this.expandCollapseButton.TabIndex = 5;
-            this.expandCollapseButton.UseVisualStyleBackColor = false;
-            this.expandCollapseButton.Click += new System.EventHandler(this.expandCollapseButton_Click);
+            expandCollapseButton.BackColor = Color.IndianRed;
+            expandCollapseButton.FlatAppearance.BorderSize = 0;
+            expandCollapseButton.FlatStyle = FlatStyle.Flat;
+            expandCollapseButton.Location = new Point(441, -14);
+            expandCollapseButton.Name = "expandCollapseButton";
+            expandCollapseButton.RoundedRadius = 10;
+            expandCollapseButton.Size = new Size(204, 17);
+            expandCollapseButton.TabIndex = 5;
+            expandCollapseButton.UseVisualStyleBackColor = false;
+            expandCollapseButton.Click += expandCollapseButton_Click;
             // 
             // expandCollapseTimer
             // 
-            this.expandCollapseTimer.Enabled = true;
-            this.expandCollapseTimer.Interval = 5;
-            this.expandCollapseTimer.Tick += new System.EventHandler(this.TimerUpdate);
+            expandCollapseTimer.Enabled = true;
+            expandCollapseTimer.Interval = 5;
+            expandCollapseTimer.Tick += TimerUpdate;
+            // 
+            // testButton
+            // 
+            testButton.Location = new Point(978, 34);
+            testButton.Name = "testButton";
+            testButton.Size = new Size(75, 23);
+            testButton.TabIndex = 6;
+            testButton.Text = "testButton";
+            testButton.UseVisualStyleBackColor = true;
+            testButton.Click += testButton_Click;
             // 
             // Parent
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(1331, 873);
-            this.Controls.Add(this.expandCollapseButton);
-            this.Controls.Add(this.goalLayoutPanel);
-            this.Controls.Add(this.taskLayoutPanel);
-            this.Controls.Add(this.addGoalButton);
-            this.Controls.Add(this.addTaskButton);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "Parent";
-            this.ShowInTaskbar = false;
-            this.Text = "EasyTasks";
-            this.TopMost = true;
-            this.TransparencyKey = System.Drawing.Color.Black;
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.Black;
+            ClientSize = new Size(1331, 873);
+            Controls.Add(testButton);
+            Controls.Add(expandCollapseButton);
+            Controls.Add(goalLayoutPanel);
+            Controls.Add(taskLayoutPanel);
+            Controls.Add(addGoalButton);
+            Controls.Add(addTaskButton);
+            FormBorderStyle = FormBorderStyle.None;
+            Name = "Parent";
+            ShowInTaskbar = false;
+            Text = "EasyTasks";
+            TopMost = true;
+            TransparencyKey = Color.Black;
+            WindowState = FormWindowState.Maximized;
+            ResumeLayout(false);
         }
 
         #endregion
 
-        
+
         private Button addTaskButton;
         private Button addGoalButton;
         private FlowLayoutPanel taskLayoutPanel;
@@ -146,5 +155,6 @@
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private RoundButton expandCollapseButton;
         private System.Windows.Forms.Timer expandCollapseTimer;
+        private Button testButton;
     }
 }

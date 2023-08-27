@@ -1,10 +1,20 @@
+using System.Security.Cryptography;
+using EasyTasks.HTTP_Content_Objects;
 using System.Runtime.InteropServices;
+using System.Text;
 using System.Text.Json;
+using MySqlX.XDevAPI.Common;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using Mysqlx.Session;
+using Org.BouncyCastle.Crypto;
 
 namespace EasyTasks
 {
     public partial class Parent : Form
     {
+        private SettingsControl settings;
+        private UserSaveData userSaveData;
+
         private bool collapse; //bool to tell elements if they should expand or collapse. false by default.
         private Point addTaskButtonLocation; //the desired position of the add task button when expanded
         private Point addGoalButtonLocation; //the desired position of the add goal button when expanded
@@ -20,6 +30,12 @@ namespace EasyTasks
         {
             InitializeComponent();
 
+            settings = new SettingsControl();
+            Controls.Add(settings);
+            settings.Visible = false;
+
+            userSaveData = new UserSaveData();
+
             addTaskButtonLocation = new Point(12, 53);
             addGoalButtonLocation = new Point(Screen.PrimaryScreen.WorkingArea.Right - 49, 53);
             taskPanelSize = new Size(420, Screen.PrimaryScreen.WorkingArea.Height - 89);
@@ -34,10 +50,65 @@ namespace EasyTasks
             LoadDataFromJson();
         }
 
+        private void addGoalButton_Click(object sender, EventArgs e)
+        {
+            GoalControl goalControl = new GoalControl();
+            goalLayoutPanel.Controls.Add(goalControl);
+        }
+
         private void addTaskButton_Click(object sender, EventArgs e)
         {
             TaskControl taskControl = new TaskControl();
             taskLayoutPanel.Controls.Add(taskControl);
+        }
+
+        public void AddTaskDatabase(TaskControl task)
+        {
+            // POST to Tasks endpoint
+            if (userSaveData.locallyAuthenticated)
+            {
+                HttpFunctions.AddTaskDatabase(task, userSaveData.username);
+                SaveDataToJson();
+            }
+            else
+            {
+                //user did not authenticate
+            }
+        }
+
+        public void UpdateTaskDatabase(TaskControl task)
+        {
+            //PUT to Tasks endpoint
+            if (userSaveData.locallyAuthenticated)
+            {
+                HttpFunctions.UpdateTaskDatabase(task, userSaveData.username);
+                SaveDataToJson();
+            }
+            else
+            {
+                //did not authenticate
+            }
+        }
+
+        public void CompleteTaskDatabase(TaskControl task)
+        {
+            //PUT to Tasks endpoint
+            if (userSaveData.locallyAuthenticated)
+            {
+                HttpFunctions.CompleteTaskDatabase(task, userSaveData.username);
+                SaveDataToJson();
+            }
+        }
+
+        private void LoadUser(string username, string password, int verfied, bool locallyAuthenticated)
+        {
+            if (userSaveData == null)
+                userSaveData = new UserSaveData();
+
+            userSaveData.username = username;
+            userSaveData.password = password;
+            userSaveData.verified = verfied;
+            userSaveData.locallyAuthenticated = locallyAuthenticated;
         }
 
         private void LoadTask(string title)
@@ -51,12 +122,6 @@ namespace EasyTasks
         {
             GoalControl goalControl = new GoalControl();
             goalControl.LoadGoal(title, goalType, startNumericalValue, endNumericalValue, customProgressBarValue, startDate, endDate);
-            goalLayoutPanel.Controls.Add(goalControl);
-        }
-
-        private void addGoalButton_Click(object sender, EventArgs e)
-        {
-            GoalControl goalControl = new GoalControl();
             goalLayoutPanel.Controls.Add(goalControl);
         }
 
@@ -138,18 +203,29 @@ namespace EasyTasks
                 );
         }
 
+        public void SetUserSaveData(string username, string password, int verified, bool locallyAuthenticated)
+        {
+            userSaveData.username = username;
+            userSaveData.password = password;
+            userSaveData.verified = verified;
+            userSaveData.locallyAuthenticated = locallyAuthenticated;
+        }
+
         public void SaveDataToJson()
         {
-            
+
             TaskSaveData[] taskSaveData = new TaskSaveData[taskLayoutPanel.Controls.Count];
             GoalSaveData[] goalSaveData = new GoalSaveData[goalLayoutPanel.Controls.Count];
             SaveData saveData = new SaveData();
 
+            saveData.userSaveData = userSaveData;
+
             int i = 0;
-            foreach(TaskControl control in taskLayoutPanel.Controls)
+            foreach (TaskControl control in taskLayoutPanel.Controls)
             {
                 taskSaveData[i] = new TaskSaveData();
                 taskSaveData[i].title = control.getTitle();
+                taskSaveData[i].databaseID = control.getDatabaseID();
                 i++;
             }
 
@@ -172,7 +248,8 @@ namespace EasyTasks
 
             string fileName = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "EasyTasksSaveData.json");
             string jsonString = JsonSerializer.Serialize(saveData);
-            File.WriteAllText(fileName, jsonString );
+            File.WriteAllText(fileName, jsonString);
+            Console.Out.WriteLine(fileName);
         }
 
         public void LoadDataFromJson()
@@ -185,15 +262,74 @@ namespace EasyTasks
 
                 if (saveData != null || saveData.tasks.Length > 0)
                 {
+                    UserSaveData user = saveData.userSaveData;
+                    LoadUser(user.username, user.password, user.verified, user.locallyAuthenticated);
+
                     foreach (TaskSaveData task in saveData.tasks)
                     {
                         LoadTask(task.title);
                     }
-                    foreach(GoalSaveData goal in saveData.goals)
+                    foreach (GoalSaveData goal in saveData.goals)
                     {
-                        LoadGoal(goal.title, goal.goalType, goal.startNumericalValue, goal.endNumericalValue , goal.customProgressBarValue, goal.startDate, goal.endDate);
+                        LoadGoal(goal.title, goal.goalType, goal.startNumericalValue, goal.endNumericalValue, goal.customProgressBarValue, goal.startDate, goal.endDate);
                     }
                 }
+            }
+        }
+
+        private void testButton_Click(object sender, EventArgs e)
+        {
+            if (settings.Visible)
+            {
+                settings.Location = new Point(0, 0);
+                settings.Visible = false;
+            }
+            else
+            {
+                settings.Location = new Point(500, 500);
+                settings.Visible = true;
+            }
+
+        }
+
+        public async void Register(string username, string localPassword)
+        {
+            // POST to User endpoint
+            HttpFunctions.Register(username, localPassword);
+        }
+
+        public async Task<bool> Authenticate(string username, string localPassword)
+        {
+            // GET to User endpoint
+            var authTask = HttpFunctions.Authenticate(username, localPassword);
+            var authResult = await authTask;
+
+            string savedataPassword = userSaveData.password;
+            if (authResult) savedataPassword = localPassword;
+
+            SetUserSaveData(username, savedataPassword, Convert.ToInt32(authResult), authResult);
+            SaveDataToJson();
+            MessageBox.Show("Authentication result: " + authResult);
+            return authResult;
+        }
+
+        public async void ChangePassword(string username, string currentLocalPassword, string newLocalPassword)
+        {
+            //PUT to User endpoint
+            
+            var authTask = Authenticate(username, currentLocalPassword);
+            var authResult = await authTask;
+
+            if (authResult)
+            {
+                HttpFunctions.ChangePassword(username, currentLocalPassword, newLocalPassword);
+
+                SetUserSaveData(username, newLocalPassword, userSaveData.verified, userSaveData.locallyAuthenticated);
+                SaveDataToJson();
+            }
+            else
+            {
+                //did not authenticate
             }
         }
     }
